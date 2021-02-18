@@ -1,0 +1,19 @@
+.dialogs {
+  display: inline-block;
+  width: 200px;
+  margin-left: 5px;
+  background-color: rgb(0, 162, 255);
+}
+
+.list {
+  list-style-type: none;
+}
+
+.active {
+  color: rgb(251, 255, 0);
+}
+
+.link {
+  color: brown;
+  cursor: pointer;
+}

@@ -1,0 +1,6 @@
+.messages {
+  display: flex;
+  background-color: bisque;
+  margin: 5px;
+  height: 100%;
+}

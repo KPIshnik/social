@@ -1,0 +1,8 @@
+.messages {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.list {
+  list-style-type: none;
+}

@@ -1,0 +1,36 @@
+.greet {
+  color: rgb(14, 238, 14);
+}
+
+.main {
+  background-color: bisque;
+  margin: 5px;
+  height: 100%;
+}
+
+.main h3 {
+  margin: 10px;
+}
+
+.button {
+  display: inline-block;
+  margin: 20px 200px;
+  width: 160px;
+  height: 40px;
+  background-color: #157fba;
+  color: white;
+  border-color: white;
+  font-size: 24px;
+}
+
+.pagesList li {
+  list-style: none;
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 18px;
+}
+
+.active {
+  font-weight: bold;
+  color: rgb(180, 177, 0);
+}

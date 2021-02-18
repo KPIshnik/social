@@ -1,0 +1,46 @@
+.avatar {
+  /* display: inline-block; */
+  float: left;
+  margin: 0 10px;
+}
+.avatar img {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+
+  border-radius: 50%;
+}
+
+.userInfo {
+  display: inline-block;
+  width: 500px;
+  height: 100px;
+  border: 1px solid rgb(209, 209, 209);
+  border-radius: 10px;
+  background-color: rgb(214, 214, 214);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.userInfo p span:last-child {
+  float: right;
+}
+
+.userInfo p span {
+  margin: 0 10px;
+}
+
+.toggleFollowButton {
+  display: block;
+  margin: 0;
+  width: 60px;
+  height: 24px;
+  background-color: #157fba;
+  color: white;
+  border-color: white;
+  font-size: 14px;
+}
+
+.user {
+  margin: 10px;
+}

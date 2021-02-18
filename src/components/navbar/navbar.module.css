@@ -1,0 +1,15 @@
+.navbar {
+  background-color: #157fba;
+  height: 100%;
+  color: #fff;
+  margin: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a.active {
+  color: rgb(255, 218, 6);
+}
