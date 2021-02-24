@@ -34,3 +34,7 @@
   font-weight: bold;
   color: rgb(180, 177, 0);
 }
+
+li {
+  cursor: pointer;
+}

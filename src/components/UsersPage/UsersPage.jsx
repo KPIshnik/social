@@ -1,45 +1,35 @@
-import style from "./UserPage.module.css";
 import UserItem from "./userItem/userItem";
-import React from "react";
-import * as axios from "axios";
-//props.getUsers();
+import style from "./UserPage.module.css";
 
-class UsersPage extends React.Component {
-  componentDidMount() {
-    axios
-      .get(
-        "https://social-network.samuraijs.com/api/1.0/users?page=150&count=4"
-      )
-      .then((response) => {
-        console.log(response.data.items);
-        this.props.setUsers(response.data.items);
-      });
-  }
+export default function UsersPage(props) {
+  const users = props.users.map((u) => (
+    <UserItem user={u} toggleFolow={props.toggleFolow} key={u.id} />
+  ));
 
-  render() {
-    console.log("my debug");
-    console.log(this.props.getUsers());
-    const users = this.props.users.map((u) => (
-      <UserItem user={u} toggleFolow={this.props.toggleFolow} key={u.id} />
-    ));
-    return (
-      <div className={style.main}>
-        <h3> Users: </h3>
-        <ul className={style.pagesList}>
-          <li>1</li>
-          <li className={style.active}>2</li>
-          <li>3</li>
-          <li>4</li>
-        </ul>
-
-        {users}
-
-        <button onClick={this.props.loadMoreUsers} className={style.button}>
-          Show more
-        </button>
-      </div>
+  let pages = [];
+  for (let i = 1; i <= props.pageCount; i++) {
+    pages.push(
+      <li
+        key={i}
+        className={i === props.currentPage ? style.active : ""}
+        onClick={() => {
+          props.onPageChanged(i);
+        }}
+      >
+        {i}
+      </li>
     );
   }
-}
+  return (
+    <div className={style.main}>
+      <h3> Users: </h3>
+      <ul className={style.pagesList}>{pages}</ul>
 
-export default UsersPage;
+      {users}
+
+      <button onClick={props.loadMoreUsers} className={style.button}>
+        Show more
+      </button>
+    </div>
+  );
+}

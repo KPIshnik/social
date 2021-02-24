@@ -3,11 +3,18 @@
 const toggleFollow = "TOGGLE-FOLLOW";
 const getUsers = "GET-USERS";
 const setUsers = "SET-USERS";
+const setPageCount = "SET-PAGE-COUNT";
+const selectPage = "SELECT-PAGE";
+const IsFetching = "SET_ISFETCHING";
 
 export * as axios from "axios";
 
 let initial = {
   users: [],
+  pageCount: 0,
+  usersOnPage: 4,
+  currentPage: 1,
+  isFatching: true,
 };
 
 export default function usersReducer(state = initial, action) {
@@ -24,15 +31,16 @@ export default function usersReducer(state = initial, action) {
       };
       return newState;
     case getUsers:
-      // axios
-      //   .get("https://social-network.samuraijs.com/api/1.0/users")
-      //   .then((response) => {
-      //     console.log(response);
-      //     return { ...state, users: [...state.users].push(response.items) };
-      //   });
       return state;
     case setUsers:
-      return { ...state, users: state.users.concat(...action.users) };
+      return { ...state, users: action.users };
+    case setPageCount:
+      let numberOfPages = Math.ceil(action.usersCount / action.usersOnPage);
+      return { ...state, pageCount: numberOfPages };
+    case selectPage:
+      return { ...state, currentPage: action.page };
+    case IsFetching:
+      return { ...state, isFatching: action.isFatching };
     default:
       return state;
   }
@@ -55,5 +63,27 @@ export function setUsersAC(users) {
   return {
     type: setUsers,
     users: users,
+  };
+}
+
+export function setPageCountAC(usersCount) {
+  return {
+    type: setPageCount,
+    usersCount: usersCount,
+    usersOnPage: 4,
+  };
+}
+
+export function selectPageAC(page) {
+  return {
+    type: selectPage,
+    page: page,
+  };
+}
+
+export function setIsFetching(isFatching) {
+  return {
+    type: IsFetching,
+    isFatching,
   };
 }

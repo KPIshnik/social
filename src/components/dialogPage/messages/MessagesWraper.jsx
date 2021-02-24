@@ -6,13 +6,9 @@ import {
   sendMessageActionCreator,
 } from "../../state/dialogReducer";
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    apdateNewMessageText: (text) =>
-      dispatch(apdateNewMessageTextActionCreator(text)),
-
-    sendMessage: () => dispatch(sendMessageActionCreator()),
-  };
+let mapDispatchToProps = {
+  apdateNewMessageText: apdateNewMessageTextActionCreator,
+  sendMessage: sendMessageActionCreator,
 };
 
 let mapStateToProps = (state) => {

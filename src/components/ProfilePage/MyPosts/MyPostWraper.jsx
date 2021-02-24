@@ -13,13 +13,9 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    apdateNewPostText: (text) => dispatch(apdateNewPostTextActionCreator(text)),
-    addPost: () => dispatch(addPostActionCreator()),
-  };
+let mapDispatchToProps = {
+  apdateNewPostText: apdateNewPostTextActionCreator,
+  addPost: addPostActionCreator,
 };
 
-let MyPostasWraper = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
-
-export default MyPostasWraper;
+export default connect(mapStateToProps, mapDispatchToProps)(MyPosts);

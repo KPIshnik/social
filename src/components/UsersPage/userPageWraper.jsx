@@ -3,23 +3,34 @@ import {
   toggleFolowActionCreator,
   getUsersAC,
   setUsersAC,
+  setPageCountAC,
+  selectPageAC,
+  setIsFetching,
 } from "../state/usersReducer";
-import UsersPage from "./UsersPage";
+import UsersClassPage from "./UsersClassPage";
 
 let mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
+    pageCount: state.usersPage.pageCount,
+    usersOnPage: state.usersPage.usersOnPage,
+    currentPage: state.usersPage.currentPage,
+    isFatching: state.usersPage.isFatching,
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    toggleFolow: (userID) => dispatch(toggleFolowActionCreator(userID)),
-    getUsers: () => dispatch(getUsersAC()),
-    setUsers: (users) => dispatch(setUsersAC(users)),
-  };
+let mapDispatchToProps = {
+  toggleFolow: toggleFolowActionCreator,
+  getUsers: getUsersAC,
+  setUsers: setUsersAC,
+  setNumberOfPages: setPageCountAC,
+  selectPage: selectPageAC,
+  setIsFetching,
 };
 
-let UsersPageWraper = connect(mapStateToProps, mapDispatchToProps)(UsersPage);
+let UsersPageWraper = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UsersClassPage);
 
 export default UsersPageWraper;
