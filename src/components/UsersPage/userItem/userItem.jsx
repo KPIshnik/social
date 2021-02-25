@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import style from "./userItem.module.css";
 
 const defaultAvatar =
@@ -9,11 +10,13 @@ export default function UserItem(props) {
   return (
     <div className={style.user}>
       <div className={style.avatar}>
-        <img
-          src={avatar != null ? avatar : defaultAvatar}
-          title="avatar"
-          alt=""
-        />
+        <NavLink to={"/profile/" + props.user.id}>
+          <img
+            src={avatar != null ? avatar : defaultAvatar}
+            title="avatar"
+            alt=""
+          />
+        </NavLink>
         <button
           className={style.toggleFollowButton}
           onClick={() => props.toggleFolow(props.user.id)}

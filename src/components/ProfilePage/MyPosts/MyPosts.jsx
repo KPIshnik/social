@@ -16,10 +16,9 @@ export default function MyPosts(props) {
       </div>
     );
   });
-  debugger;
-  //let text = newPostField.current.value;
+
   return (
-    <div className={`${styles.profile} "content"`}>
+    <div>
       <div className={styles.addPostArea}>
         <textarea
           name="new_post"
@@ -27,19 +26,13 @@ export default function MyPosts(props) {
           rows="5"
           ref={newPostField}
           value={props.newPostText}
-          onChange={
-            () => props.apdateNewPostText(newPostField.current.value)
-            // props.dispatch(
-            // apdateNewPostTextActionCreator(text) )
-          }
+          onChange={() => props.apdateNewPostText(newPostField.current.value)}
           onFocus={() => (newPostField.current.value = "")}
         />
         <br />
         <button
           className={styles.addPostButton}
-          onClick={
-            () => props.addPost() /*props.dispatch(addPostActionCreator())+*/
-          }
+          onClick={() => props.addPost()}
         >
           add post
         </button>

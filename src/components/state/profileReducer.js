@@ -1,5 +1,6 @@
 const ApdateNPT = "APADATE-NEW-POST-TEXT";
 const addPost = "ADD-POST";
+const setUserProfileData = "SET_USER_PROFILE";
 
 const initial = {
   posts: [
@@ -9,6 +10,7 @@ const initial = {
   ],
 
   newPostText: "new post here",
+  userProfile: null,
 };
 
 export default function profileReducer(state = initial, action) {
@@ -29,7 +31,8 @@ export default function profileReducer(state = initial, action) {
       return Object.assign({}, state, {
         newPostText: action.message,
       });
-
+    case setUserProfileData:
+      return { ...state, userProfile: action.userProfile };
     default:
       return state;
   }
@@ -45,5 +48,12 @@ export function apdateNewPostTextActionCreator(text) {
 export function addPostActionCreator() {
   return {
     type: addPost,
+  };
+}
+
+export function setUserProfile(userProfile) {
+  return {
+    type: setUserProfileData,
+    userProfile,
   };
 }
