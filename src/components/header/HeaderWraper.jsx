@@ -12,7 +12,9 @@ class HeaderWraper extends React.Component {
       })
       .then((response) => {
         console.log(response);
-        this.props.login(response.data.data);
+        if (response.data.resultCode === 0) {
+          this.props.login(response.data.data);
+        }
       });
   }
 

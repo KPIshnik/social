@@ -20,16 +20,15 @@ let initial = {
 export default function usersReducer(state = initial, action) {
   switch (action.type) {
     case toggleFollow:
-      let newState = {
+      return {
         ...state,
         users: state.users.map((u) => {
           if (u.id === action.userID) {
-            return { ...u, isFolowed: !u.isFolowed };
+            return { ...u, followed: !u.followed };
           }
           return u;
         }),
       };
-      return newState;
     case getUsers:
       return state;
     case setUsers:

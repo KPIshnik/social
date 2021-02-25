@@ -8,13 +8,17 @@ class UsersClassPage extends React.Component {
     this.props.setIsFetching(true);
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersOnPage}`
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.usersOnPage}`,
+        {
+          withCredentials: true,
+        }
       )
       .then((response) => {
         console.log(response.data.items);
         this.props.setUsers(response.data.items);
         this.props.setNumberOfPages(response.data.totalCount);
         this.props.setIsFetching(false);
+        //console.log("sadfdgsdfdafsafgh");
       });
   }
 
@@ -23,7 +27,10 @@ class UsersClassPage extends React.Component {
     this.props.setIsFetching(true);
     axios
       .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${i}&count=${this.props.usersOnPage}`
+        `https://social-network.samuraijs.com/api/1.0/users?page=${i}&count=${this.props.usersOnPage}`,
+        {
+          withCredentials: true,
+        }
       )
       .then((response) => {
         this.props.setIsFetching(false);

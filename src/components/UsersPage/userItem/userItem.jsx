@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom";
 import style from "./userItem.module.css";
-
+import * as axios from "axios";
 const defaultAvatar =
   "https://www.dlf.pt/dfpng/middlepng/276-2761324_transparent-default-avatar-png-profile-no-image-icon.png";
 
 export default function UserItem(props) {
-  const folow = props.user.isFolowed ? "unfolow" : "folow";
+  console.log(props.user.followed);
+  const folow = props.user.followed ? "unfolow" : "folow";
   const avatar = props.user.photos.small;
   return (
     <div className={style.user}>
@@ -19,7 +20,45 @@ export default function UserItem(props) {
         </NavLink>
         <button
           className={style.toggleFollowButton}
-          onClick={() => props.toggleFolow(props.user.id)}
+          onClick={() => {
+            if (props.user.followed) {
+              axios
+                .delete(
+                  `https://social-network.samuraijs.com/api/1.0/follow/${props.user.id}`,
+                  {
+                    withCredentials: true,
+                    headers: {
+                      "API-KEY": "f29f15d9-daef-4e4c-bf61-557a9a73c91e",
+                    },
+                  }
+                )
+                .then((response) => {
+                  if (response.data.resultCode === 0) {
+                    props.toggleFolow(props.user.id);
+                    console.log(props.user.followed);
+                  }
+                });
+            } else {
+              axios
+                .post(
+                  `https://social-network.samuraijs.com/api/1.0/follow/${props.user.id}`,
+                  {},
+                  {
+                    withCredentials: true,
+                    headers: {
+                      "API-KEY": "f29f15d9-daef-4e4c-bf61-557a9a73c91e",
+                    },
+                  }
+                )
+                .then((response) => {
+                  console.log(response);
+                  if (response.data.resultCode === 0) {
+                    props.toggleFolow(props.user.id);
+                    console.log(props.user.followed);
+                  }
+                });
+            }
+          }}
         >
           {folow}
         </button>
