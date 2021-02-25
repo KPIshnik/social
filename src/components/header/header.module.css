@@ -2,6 +2,9 @@
   margin: 5px;
   background-color: #157fba;
 }
-h2 {
+.header h1 {
+  margin: 0;
   padding: 0px 10px;
+  float: right;
+  color: white;
 }
