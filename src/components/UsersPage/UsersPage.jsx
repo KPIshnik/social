@@ -5,10 +5,10 @@ export default function UsersPage(props) {
   const users = props.users.map((u) => (
     <UserItem
       user={u}
-      toggleFolow={props.toggleFolow}
       followingInProgres={props.followingInProgres}
       key={u.id}
-      toggleDisableButton={props.toggleDisableButton}
+      followUser={props.followUser}
+      unFollowUser={props.unFollowUser}
     />
   ));
 

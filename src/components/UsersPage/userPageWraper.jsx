@@ -1,12 +1,9 @@
 import { connect } from "react-redux";
 import {
-  toggleFolowActionCreator,
-  getUsersAC,
-  setUsersAC,
   setPageCountAC,
-  selectPageAC,
-  setIsFetching,
-  toggleDisableButton,
+  getUsers,
+  followUser,
+  unFollowUser,
 } from "../state/usersReducer";
 import UsersClassPage from "./UsersClassPage";
 
@@ -22,13 +19,11 @@ let mapStateToProps = (state) => {
 };
 
 let mapDispatchToProps = {
-  toggleFolow: toggleFolowActionCreator,
-  getUsers: getUsersAC,
-  setUsers: setUsersAC,
   setNumberOfPages: setPageCountAC,
-  selectPage: selectPageAC,
-  setIsFetching,
-  toggleDisableButton,
+
+  getUsers,
+  followUser,
+  unFollowUser,
 };
 
 let UsersPageWraper = connect(

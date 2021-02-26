@@ -1,7 +1,5 @@
 import { NavLink } from "react-router-dom";
 import style from "./userItem.module.css";
-
-import { usersAPI } from "../../../api/api";
 const defaultAvatar =
   "https://www.dlf.pt/dfpng/middlepng/276-2761324_transparent-default-avatar-png-profile-no-image-icon.png";
 
@@ -24,21 +22,9 @@ export default function UserItem(props) {
           className={style.toggleFollowButton}
           onClick={() => {
             if (props.user.followed) {
-              props.toggleDisableButton(props.user.id);
-              usersAPI.unFopllow(props.user.id).then((response) => {
-                if (response.resultCode === 0) {
-                  props.toggleDisableButton(props.user.id);
-                  props.toggleFolow(props.user.id);
-                }
-              });
+              props.unFollowUser(props.user.id);
             } else {
-              props.toggleDisableButton(props.user.id);
-              usersAPI.follow(props.user.id).then((response) => {
-                if (response.resultCode === 0) {
-                  props.toggleFolow(props.user.id);
-                  props.toggleDisableButton(props.user.id);
-                }
-              });
+              props.followUser(props.user.id);
             }
           }}
         >

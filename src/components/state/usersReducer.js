@@ -1,14 +1,12 @@
-//import axios from "axios";
+import { usersAPI } from "../../api/api";
 
 const toggleFollow = "TOGGLE-FOLLOW";
-const getUsers = "GET-USERS";
+
 const setUsers = "SET-USERS";
 const setPageCount = "SET-PAGE-COUNT";
 const selectPage = "SELECT-PAGE";
 const IsFetching = "SET_ISFETCHING";
 const ToggleDisablonBattom = "TOGGLE-DISABLE";
-
-export * as axios from "axios";
 
 let initial = {
   users: [],
@@ -31,8 +29,7 @@ export default function usersReducer(state = initial, action) {
           return u;
         }),
       };
-    case getUsers:
-      return state;
+
     case setUsers:
       return { ...state, users: action.users };
     case setPageCount:
@@ -62,12 +59,6 @@ export function toggleFolowActionCreator(userID) {
   return {
     type: toggleFollow,
     userID: userID,
-  };
-}
-
-export function getUsersAC() {
-  return {
-    type: getUsers,
   };
 }
 
@@ -106,3 +97,33 @@ export function toggleDisableButton(userID) {
     userID,
   };
 }
+
+export const getUsers = (currentPage, usersOnPage) => (dispatch) => {
+  dispatch(setIsFetching(true));
+  dispatch(selectPageAC(currentPage));
+  usersAPI.getUsers(currentPage, usersOnPage).then((response) => {
+    dispatch(setUsersAC(response.items));
+    dispatch(setPageCountAC(response.totalCount));
+    dispatch(setIsFetching(false));
+  });
+};
+
+export const followUser = (userID) => (dispatch) => {
+  dispatch(toggleDisableButton(userID));
+  usersAPI.follow(userID).then((response) => {
+    if (response.resultCode === 0) {
+      dispatch(toggleDisableButton(userID));
+      dispatch(toggleFolowActionCreator(userID));
+    }
+  });
+};
+
+export const unFollowUser = (userID) => (dispatch) => {
+  dispatch(toggleDisableButton(userID));
+  usersAPI.unFopllow(userID).then((response) => {
+    if (response.resultCode === 0) {
+      dispatch(toggleDisableButton(userID));
+      dispatch(toggleFolowActionCreator(userID));
+    }
+  });
+};
