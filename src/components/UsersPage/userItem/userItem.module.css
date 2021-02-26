@@ -44,3 +44,7 @@
 .user {
   margin: 10px;
 }
+
+.user button:disabled {
+  background-color: grey;
+}

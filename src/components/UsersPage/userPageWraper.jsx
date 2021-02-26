@@ -6,6 +6,7 @@ import {
   setPageCountAC,
   selectPageAC,
   setIsFetching,
+  toggleDisableButton,
 } from "../state/usersReducer";
 import UsersClassPage from "./UsersClassPage";
 
@@ -16,6 +17,7 @@ let mapStateToProps = (state) => {
     usersOnPage: state.usersPage.usersOnPage,
     currentPage: state.usersPage.currentPage,
     isFatching: state.usersPage.isFatching,
+    followingInProgres: state.usersPage.followingInProgres,
   };
 };
 
@@ -26,6 +28,7 @@ let mapDispatchToProps = {
   setNumberOfPages: setPageCountAC,
   selectPage: selectPageAC,
   setIsFetching,
+  toggleDisableButton,
 };
 
 let UsersPageWraper = connect(

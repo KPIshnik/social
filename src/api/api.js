@@ -13,8 +13,19 @@ export const usersAPI = {
     return instance
       .get(`users?page=${pageNumber}&count=${usersOnPage}`)
       .then((response) => {
-        console.log(response);
         return response.data;
       });
+  },
+
+  unFopllow(userID) {
+    return instance.delete("follow/" + userID).then((res) => {
+      return res.data;
+    });
+  },
+
+  follow(userID) {
+    return instance.post("follow/" + userID).then((res) => {
+      return res.data;
+    });
   },
 };

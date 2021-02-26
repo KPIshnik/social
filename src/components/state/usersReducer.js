@@ -6,6 +6,7 @@ const setUsers = "SET-USERS";
 const setPageCount = "SET-PAGE-COUNT";
 const selectPage = "SELECT-PAGE";
 const IsFetching = "SET_ISFETCHING";
+const ToggleDisablonBattom = "TOGGLE-DISABLE";
 
 export * as axios from "axios";
 
@@ -15,6 +16,7 @@ let initial = {
   usersOnPage: 4,
   currentPage: 1,
   isFatching: true,
+  followingInProgres: new Set(),
 };
 
 export default function usersReducer(state = initial, action) {
@@ -40,6 +42,17 @@ export default function usersReducer(state = initial, action) {
       return { ...state, currentPage: action.page };
     case IsFetching:
       return { ...state, isFatching: action.isFatching };
+    case ToggleDisablonBattom:
+      const newState = {
+        ...state,
+        followingInProgres: new Set(state.followingInProgres),
+      };
+      if (newState.followingInProgres.has(action.userID)) {
+        newState.followingInProgres.delete(action.userID);
+      } else {
+        newState.followingInProgres.add(action.userID);
+      }
+      return newState;
     default:
       return state;
   }
@@ -84,5 +97,12 @@ export function setIsFetching(isFatching) {
   return {
     type: IsFetching,
     isFatching,
+  };
+}
+
+export function toggleDisableButton(userID) {
+  return {
+    type: ToggleDisablonBattom,
+    userID,
   };
 }
