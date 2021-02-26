@@ -2,8 +2,7 @@ import MyPostsWraper from "./MyPosts/MyPostWraper";
 import style from "./ProfilePage.module.css";
 import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import { setUserProfile } from "../state/profileReducer";
-import * as axios from "axios";
+import { getUserProfile } from "../state/profileReducer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import Preloader from "../common/Preloader";
@@ -12,12 +11,7 @@ class ProfilePageContainer extends React.Component {
   componentDidMount() {
     let userID = this.props.match.params.id;
     if (!userID) userID = 25;
-    axios
-      .get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
-      .then((response) => {
-        this.props.setUserProfile(response.data);
-      });
-    console.log(this.props.location);
+    this.props.getUserProfile(userID);
   }
 
   render() {
@@ -39,7 +33,7 @@ let mapStateToProps = (state) => {
   };
 };
 let mapDispathToProps = {
-  setUserProfile,
+  getUserProfile,
 };
 export default connect(
   mapStateToProps,

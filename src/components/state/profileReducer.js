@@ -1,3 +1,5 @@
+import { usersAPI } from "../../api/api";
+
 const ApdateNPT = "APADATE-NEW-POST-TEXT";
 const addPost = "ADD-POST";
 const setUserProfileData = "SET_USER_PROFILE";
@@ -57,3 +59,7 @@ export function setUserProfile(userProfile) {
     userProfile,
   };
 }
+
+export const getUserProfile = (userID) => (dispatch) => {
+  usersAPI.loadUserProfile(userID).then((res) => dispatch(setUserProfile(res)));
+};

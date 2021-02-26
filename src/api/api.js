@@ -28,4 +28,10 @@ export const usersAPI = {
       return res.data;
     });
   },
+
+  loadUserProfile(userID) {
+    return instance.get(`profile/${userID}`).then((response) => {
+      return response.data;
+    });
+  },
 };
