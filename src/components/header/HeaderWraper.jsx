@@ -1,25 +1,14 @@
 import React from "react";
-import * as axios from "axios";
 import Header from "./header";
 import { connect } from "react-redux";
-import { loginAC } from "../state/authReducer";
+import { authMe } from "../state/authReducer";
 
 class HeaderWraper extends React.Component {
   componentDidMount() {
-    axios
-      .get("https://social-network.samuraijs.com/api/1.0/auth/me", {
-        withCredentials: true,
-      })
-      .then((response) => {
-        console.log(response);
-        if (response.data.resultCode === 0) {
-          this.props.login(response.data.data);
-        }
-      });
+    this.props.authMe();
   }
 
   render() {
-    console.log(this.props.userName);
     return (
       <Header
         userName={this.props.userName}
@@ -37,7 +26,7 @@ let mapStateToProps = (state) => {
 };
 
 let mapDispatchToProps = {
-  login: loginAC,
+  authMe,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderWraper);

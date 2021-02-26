@@ -1,3 +1,5 @@
+import { authAPI } from "../../api/api";
+
 const setUserData = "SET_USER_DATA";
 const logout = "LOGOUT";
 
@@ -31,3 +33,11 @@ export function logoutAC() {
     type: logout,
   };
 }
+
+export const authMe = () => (dispatch) => {
+  authAPI.me().then((response) => {
+    if (response.resultCode === 0) {
+      dispatch(loginAC(response.data));
+    }
+  });
+};
