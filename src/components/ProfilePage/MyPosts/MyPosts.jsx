@@ -1,7 +1,30 @@
 import styles from "./MyPosts.module.css";
-import react from "react";
+// import react from "react";
+import { Field, reduxForm } from "redux-form";
 
-const newPostField = react.createRef();
+let AddPostForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <Field
+        component="textarea"
+        name="new_post"
+        placeholder="new post here"
+        cols="30"
+        rows="5"
+      />
+      <br />
+      <button className={styles.addPostButton} type="submit">
+        add post
+      </button>
+    </form>
+  );
+};
+
+AddPostForm = reduxForm({
+  form: "addNewPost",
+})(AddPostForm);
+
+// const newPostField = react.createRef();
 
 export default function MyPosts(props) {
   let posts = props.posts.map((post) => {
@@ -17,10 +40,15 @@ export default function MyPosts(props) {
     );
   });
 
+  function handleSubmit(data) {
+    console.log(data);
+    props.addPost(data.new_post);
+  }
   return (
     <div>
       <div className={styles.addPostArea}>
-        <textarea
+        <AddPostForm onSubmit={handleSubmit} addPost={props.addPost} />
+        {/* <textarea
           name="new_post"
           cols="30"
           rows="5"
@@ -35,7 +63,7 @@ export default function MyPosts(props) {
           onClick={() => props.addPost()}
         >
           add post
-        </button>
+        </button> */}
       </div>
 
       <div className={styles.posts}>{posts}</div>

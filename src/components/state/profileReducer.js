@@ -12,7 +12,7 @@ const initial = {
     { id: 3, post: "Mahalo", likes: 3 },
   ],
 
-  newPostText: "new post here",
+  //newPostText: "new post here",
   userProfile: null,
   userStatus: "",
 };
@@ -25,7 +25,7 @@ export default function profileReducer(state = initial, action) {
           ...state.posts,
           {
             id: state.posts.length,
-            post: state.newPostText,
+            post: action.post,
             likes: 0,
           },
         ],
@@ -51,9 +51,10 @@ export function apdateNewPostTextActionCreator(text) {
   };
 }
 
-export function addPostActionCreator() {
+export function addPostActionCreator(post) {
   return {
     type: addPost,
+    post,
   };
 }
 
