@@ -5,6 +5,7 @@ import Navbar from "./components/navbar/navbar";
 import ProfilePageContainer from "./components/ProfilePage/ProfilePageContainer";
 import DialogsPage from "./components/dialogPage/DialogsPage";
 import UsersPageWraper from "./components/UsersPage/userPageWraper";
+import LoginPage from "./components/loginPage/LoginPage";
 
 function App(props) {
   return (
@@ -15,6 +16,7 @@ function App(props) {
         <Route path="/profile/:id?" render={() => <ProfilePageContainer />} />
         <Route path="/dialogs" render={() => <DialogsPage />} />
         <Route path="/users" render={() => <UsersPageWraper />} />
+        <Route path="/login" render={() => <LoginPage />} />
       </div>
     </Router>
   );

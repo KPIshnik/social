@@ -30,9 +30,33 @@ export const usersAPI = {
   },
 
   loadUserProfile(userID) {
+    console.warn("old method, pls use profileAPI obj");
+    return profileAPI.loadUserProfile(userID);
+    // return instance.get(`profile/${userID}`).then((response) => {
+    //   return response.data;
+    // });
+  },
+};
+
+export const profileAPI = {
+  loadUserProfile(userID) {
     return instance.get(`profile/${userID}`).then((response) => {
       return response.data;
     });
+  },
+
+  getStatus(userID) {
+    return instance.get("profile/status/" + userID).then((response) => {
+      return response;
+    });
+  },
+
+  updateStatus(newStatus) {
+    return instance
+      .put("profile/status/", { status: newStatus })
+      .then((res) => {
+        return res;
+      });
   },
 };
 

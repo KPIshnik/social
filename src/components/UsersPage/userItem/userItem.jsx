@@ -4,7 +4,6 @@ const defaultAvatar =
   "https://www.dlf.pt/dfpng/middlepng/276-2761324_transparent-default-avatar-png-profile-no-image-icon.png";
 
 export default function UserItem(props) {
-  console.log(props.user.followed);
   const folow = props.user.followed ? "unfolow" : "folow";
   const avatar = props.user.photos.small;
   return (

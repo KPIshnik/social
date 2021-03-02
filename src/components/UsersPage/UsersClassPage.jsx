@@ -2,6 +2,8 @@ import React from "react";
 import UsersPage from "./UsersPage";
 import Preloader from "../common/Preloader";
 
+import { withAuthRedirect } from "../HOCs/redirectWraper";
+
 class UsersClassPage extends React.Component {
   componentDidMount() {
     this.props.getUsers(this.props.currentPage, this.props.usersOnPage);
@@ -32,4 +34,4 @@ class UsersClassPage extends React.Component {
   }
 }
 
-export default UsersClassPage;
+export default withAuthRedirect(UsersClassPage);

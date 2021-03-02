@@ -2,7 +2,10 @@ import styles from "./dialogsPage.module.css";
 import DialogsWraper from "./dialogs/dialogsWraper";
 import MessagesWraper from "./messages/MessagesWraper";
 
-export default function DialogsPage(props) {
+import { connect } from "react-redux";
+import { withAuthRedirect } from "../HOCs/redirectWraper";
+
+function DialogsPage(props) {
   return (
     <div className={`${styles.messages} + "content"`}>
       <DialogsWraper />
@@ -10,3 +13,7 @@ export default function DialogsPage(props) {
     </div>
   );
 }
+
+let withRedirect = withAuthRedirect(DialogsPage);
+
+export default withRedirect;

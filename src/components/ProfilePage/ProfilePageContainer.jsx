@@ -2,24 +2,37 @@ import MyPostsWraper from "./MyPosts/MyPostWraper";
 import style from "./ProfilePage.module.css";
 import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import { getUserProfile } from "../state/profileReducer";
+import {
+  getUserProfile,
+  updateUserStatus,
+  getUserStatus,
+} from "../state/profileReducer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import Preloader from "../common/Preloader";
+import { withAuthRedirect } from "../HOCs/redirectWraper";
+import { compose } from "redux";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 class ProfilePageContainer extends React.Component {
   componentDidMount() {
     let userID = this.props.match.params.id;
-    if (!userID) userID = 25;
+    if (!userID) userID = 15033;
     this.props.getUserProfile(userID);
+    this.props.getUserStatus(userID);
   }
 
   render() {
     if (!this.props.userProfile) {
       return <Preloader />;
     }
+
     return (
       <div className={style.profile + " content"}>
+        <ProfileStatus
+          status={this.props.userStatus}
+          updateUserStatus={this.props.updateUserStatus}
+        />
         <ProfileInfo user={this.props.userProfile} />
         <MyPostsWraper />
       </div>
@@ -30,12 +43,17 @@ class ProfilePageContainer extends React.Component {
 let mapStateToProps = (state) => {
   return {
     userProfile: state.profilePage.userProfile,
+    userStatus: state.profilePage.userStatus,
   };
 };
 let mapDispathToProps = {
   getUserProfile,
+  updateUserStatus,
+  getUserStatus,
 };
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
-)(withRouter(ProfilePageContainer));
+
+export default compose(
+  withRouter,
+  withAuthRedirect,
+  connect(mapStateToProps, mapDispathToProps)
+)(ProfilePageContainer);

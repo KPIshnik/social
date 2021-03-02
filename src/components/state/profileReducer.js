@@ -1,8 +1,9 @@
-import { usersAPI } from "../../api/api";
+import { usersAPI, profileAPI } from "../../api/api";
 
 const ApdateNPT = "APADATE-NEW-POST-TEXT";
 const addPost = "ADD-POST";
 const setUserProfileData = "SET_USER_PROFILE";
+const setUserStatus = "SET_USER_STATUS";
 
 const initial = {
   posts: [
@@ -13,6 +14,7 @@ const initial = {
 
   newPostText: "new post here",
   userProfile: null,
+  userStatus: "",
 };
 
 export default function profileReducer(state = initial, action) {
@@ -35,6 +37,8 @@ export default function profileReducer(state = initial, action) {
       });
     case setUserProfileData:
       return { ...state, userProfile: action.userProfile };
+    case setUserStatus:
+      return { ...state, userStatus: action.status };
     default:
       return state;
   }
@@ -60,6 +64,27 @@ export function setUserProfile(userProfile) {
   };
 }
 
+const setUserStatusAC = (status) => {
+  return {
+    type: setUserStatus,
+    status,
+  };
+};
+
 export const getUserProfile = (userID) => (dispatch) => {
-  usersAPI.loadUserProfile(userID).then((res) => dispatch(setUserProfile(res)));
+  usersAPI.loadUserProfile(userID).then((res) => {
+    dispatch(setUserProfile(res));
+  });
+};
+
+export const getUserStatus = (userID) => (dispatch) => {
+  profileAPI
+    .getStatus(userID)
+    .then((res) => dispatch(setUserStatusAC(res.data)));
+};
+
+export const updateUserStatus = (newStatus) => (dispath) => {
+  profileAPI
+    .updateStatus(newStatus)
+    .then((res) => dispath(setUserStatusAC(newStatus)));
 };
