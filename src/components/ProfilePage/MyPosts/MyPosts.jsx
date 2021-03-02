@@ -1,5 +1,4 @@
 import styles from "./MyPosts.module.css";
-// import react from "react";
 import { Field, reduxForm } from "redux-form";
 
 let AddPostForm = (props) => {
@@ -24,8 +23,6 @@ AddPostForm = reduxForm({
   form: "addNewPost",
 })(AddPostForm);
 
-// const newPostField = react.createRef();
-
 export default function MyPosts(props) {
   let posts = props.posts.map((post) => {
     return (
@@ -48,22 +45,6 @@ export default function MyPosts(props) {
     <div>
       <div className={styles.addPostArea}>
         <AddPostForm onSubmit={handleSubmit} addPost={props.addPost} />
-        {/* <textarea
-          name="new_post"
-          cols="30"
-          rows="5"
-          ref={newPostField}
-          value={props.newPostText}
-          onChange={() => props.apdateNewPostText(newPostField.current.value)}
-          onFocus={() => (newPostField.current.value = "")}
-        />
-        <br />
-        <button
-          className={styles.addPostButton}
-          onClick={() => props.addPost()}
-        >
-          add post
-        </button> */}
       </div>
 
       <div className={styles.posts}>{posts}</div>

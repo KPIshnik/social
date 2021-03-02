@@ -18,7 +18,7 @@ const initial = {
     { id: 5, message: "Eeee" },
   ],
 
-  newMessageText: "New message here!",
+  //newMessageText: "New message here!",
 };
 
 export default function dialogReducer(state = initial, action) {
@@ -34,7 +34,7 @@ export default function dialogReducer(state = initial, action) {
           ...state.messages,
           {
             id: state.messages.length,
-            message: state.newMessageText,
+            message: action.message,
           },
         ],
       });
@@ -51,8 +51,9 @@ export function apdateNewMessageTextActionCreator(text) {
   };
 }
 
-export function sendMessageActionCreator() {
+export function sendMessageActionCreator(message) {
   return {
     type: sendMessage,
+    message,
   };
 }

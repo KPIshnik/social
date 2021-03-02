@@ -12,7 +12,6 @@ const initial = {
     { id: 3, post: "Mahalo", likes: 3 },
   ],
 
-  //newPostText: "new post here",
   userProfile: null,
   userStatus: "",
 };
@@ -31,10 +30,6 @@ export default function profileReducer(state = initial, action) {
         ],
       });
 
-    case "APADATE-NEW-POST-TEXT":
-      return Object.assign({}, state, {
-        newPostText: action.message,
-      });
     case setUserProfileData:
       return { ...state, userProfile: action.userProfile };
     case setUserStatus:
@@ -42,13 +37,6 @@ export default function profileReducer(state = initial, action) {
     default:
       return state;
   }
-}
-
-export function apdateNewPostTextActionCreator(text) {
-  return {
-    type: ApdateNPT,
-    message: text,
-  };
 }
 
 export function addPostActionCreator(post) {
