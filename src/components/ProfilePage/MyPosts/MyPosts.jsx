@@ -1,15 +1,18 @@
 import styles from "./MyPosts.module.css";
 import { Field, reduxForm } from "redux-form";
+import { Textarea } from "../../common/formControls";
+import { maxLength50 } from "../../common/validation";
 
 let AddPostForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <Field
-        component="textarea"
+        component={Textarea}
         name="new_post"
         placeholder="new post here"
         cols="30"
         rows="5"
+        validate={[maxLength50]}
       />
       <br />
       <button className={styles.addPostButton} type="submit">

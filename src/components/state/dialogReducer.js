@@ -1,4 +1,3 @@
-const apdateNewMesageText = "APADATE-NEW-Message-TEXT";
 const sendMessage = "Send-Message";
 
 const initial = {
@@ -17,17 +16,10 @@ const initial = {
     { id: 4, message: "Go!!" },
     { id: 5, message: "Eeee" },
   ],
-
-  //newMessageText: "New message here!",
 };
 
 export default function dialogReducer(state = initial, action) {
   switch (action.type) {
-    case "APADATE-NEW-Message-TEXT":
-      return Object.assign({}, state, {
-        newMessageText: action.message,
-      });
-
     case "Send-Message":
       return Object.assign({}, state, {
         messages: [
@@ -42,13 +34,6 @@ export default function dialogReducer(state = initial, action) {
     default:
       return state;
   }
-}
-
-export function apdateNewMessageTextActionCreator(text) {
-  return {
-    type: apdateNewMesageText,
-    message: text,
-  };
 }
 
 export function sendMessageActionCreator(message) {

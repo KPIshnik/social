@@ -1,16 +1,30 @@
 import { Field, reduxForm } from "redux-form";
+import { Input } from "../common/formControls";
+import { maxLength15, required } from "../common/validation";
 
 let LoginForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field component="input" type="text" name={"login"} />
+        email:
+        <Field
+          component={Input}
+          type="text"
+          name="login"
+          validate={[required, maxLength15]}
+        />
       </div>
       <div>
-        <Field component="input" type="text" name={"password"} />
+        Password:
+        <Field
+          component={Input}
+          type="text"
+          name="password"
+          validate={[required, maxLength15]}
+        />
       </div>
       <div>
-        <Field component="input" type="checkbox" name={"rememberMe"} /> remember
+        <Field component="input" type="checkbox" name="rememberMe" /> remember
         me
       </div>
       <div>

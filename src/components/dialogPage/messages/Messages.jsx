@@ -1,13 +1,21 @@
 import styles from "./messages.module.css";
-import react from "react";
-import { Field, reduxForm } from "redux-form";
 
-const newMessageField = react.createRef();
+import { Field, reduxForm } from "redux-form";
+import { maxLength } from "../../common/validation";
+import { Textarea } from "../../common/formControls";
+
+const maxLength50 = maxLength(50);
 
 let NewMessageForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
-      <Field component="textarea" name="newMessage" cols="30" rows="5" />
+      <Field
+        component={Textarea}
+        name="newMessage"
+        cols="30"
+        rows="5"
+        validate={[maxLength50]}
+      />
       <br />
       <button className={styles.sendMessageButton} type="submit">
         send
@@ -30,26 +38,6 @@ export default function Messages(props) {
     <div className={styles.messages}>
       <ul className={styles.list}>{messagesItems}</ul>
       <NewMessageForm onSubmit={handleSubmit} />
-      {/* <textarea
-        name="new_message"
-        cols="30"
-        rows="5"
-        ref={newMessageField}
-        value={props.newMessageText}
-        onChange={() =>
-          props.apdateNewMessageText(newMessageField.current.value)
-        }
-        onFocus={() => (newMessageField.current.value = "")}
-      />
-      <br />
-      <button
-        className={styles.sendMessageButton}
-        onClick={
-          props.sendMessage 
-        }
-      >
-        send
-      </button> */}
     </div>
   );
 }

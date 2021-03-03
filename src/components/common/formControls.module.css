@@ -1,0 +1,7 @@
+.err {
+  color: red;
+  display: block;
+}
+.warn {
+  border: 2px solid red;
+}
