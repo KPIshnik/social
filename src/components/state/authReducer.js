@@ -1,7 +1,8 @@
+import { stopSubmit } from "redux-form";
 import { authAPI } from "../../api/api";
-
+//пепеписать логаут через сетЮзерДата
 const setUserData = "SET_USER_DATA";
-const logout = "LOGOUT";
+const logoutAction = "LOGOUT";
 
 const initial = {
   isLoggedIn: false,
@@ -14,7 +15,7 @@ export default function authReducer(state = initial, action) {
   switch (action.type) {
     case setUserData:
       return { ...state, isLoggedIn: true, ...action.user };
-    case logout:
+    case logoutAction:
       return { ...initial };
     default:
       return state;
@@ -30,7 +31,7 @@ export function loginAC(user) {
 
 export function logoutAC() {
   return {
-    type: logout,
+    type: logoutAction,
   };
 }
 
@@ -38,6 +39,26 @@ export const authMe = () => (dispatch) => {
   authAPI.me().then((response) => {
     if (response.resultCode === 0) {
       dispatch(loginAC(response.data));
+    }
+  });
+};
+
+export const login = (loginData) => (dispatch) => {
+  authAPI.login(loginData).then((response) => {
+    if (response.data.resultCode === 0) {
+      dispatch(loginAC(response.data));
+    } else {
+      console.log(response.data.messages);
+      dispatch(stopSubmit("login", { _error: response.data.messages[0] }));
+    }
+  });
+};
+
+export const logout = () => (dispatch) => {
+  console.log("loggingout!!!!!!!!!!");
+  authAPI.logout().then((response) => {
+    if (response.data.resultCode === 0) {
+      dispatch(logoutAC());
     }
   });
 };

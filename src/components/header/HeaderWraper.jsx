@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./header";
 import { connect } from "react-redux";
-import { authMe } from "../state/authReducer";
+import { authMe, logout } from "../state/authReducer";
 
 class HeaderWraper extends React.Component {
   componentDidMount() {
@@ -13,6 +13,7 @@ class HeaderWraper extends React.Component {
       <Header
         userName={this.props.userName}
         isLoggedIn={this.props.isLoggedIn}
+        logout={this.props.logout}
       />
     );
   }
@@ -27,6 +28,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = {
   authMe,
+  logout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderWraper);

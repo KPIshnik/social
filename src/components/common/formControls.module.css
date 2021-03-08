@@ -5,3 +5,10 @@
 .warn {
   border: 2px solid red;
 }
+
+.formError {
+  border: 2px solid red;
+  color: red;
+  display: inline-block;
+  min-width: 150px;
+}

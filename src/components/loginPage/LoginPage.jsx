@@ -1,6 +1,10 @@
 import { Field, reduxForm } from "redux-form";
 import { Input } from "../common/formControls";
-import { maxLength15, required } from "../common/validation";
+import { maxLength50, required } from "../common/validation";
+import { connect } from "react-redux";
+import { login } from "../state/authReducer";
+import { Redirect } from "react-router-dom";
+import style from "../common/formControls.module.css";
 
 let LoginForm = (props) => {
   return (
@@ -10,23 +14,24 @@ let LoginForm = (props) => {
         <Field
           component={Input}
           type="text"
-          name="login"
-          validate={[required, maxLength15]}
+          name="email"
+          validate={[required, maxLength50]}
         />
       </div>
       <div>
         Password:
         <Field
           component={Input}
-          type="text"
+          type="password"
           name="password"
-          validate={[required, maxLength15]}
+          validate={[required, maxLength50]}
         />
       </div>
       <div>
         <Field component="input" type="checkbox" name="rememberMe" /> remember
         me
       </div>
+      {props.error && <div className={style.formError}>{props.error}</div>}
       <div>
         <button type="submit">login</button>
       </div>
@@ -38,10 +43,16 @@ LoginForm = reduxForm({
   form: "login",
 })(LoginForm);
 
-export default function LoginPage() {
-  function onSubmit(data) {
-    console.log(data);
+function LoginPage(props) {
+  function onSubmit(loginData) {
+    console.log(loginData);
+    props.login(loginData);
   }
+
+  if (props.isLoggedIn) {
+    return <Redirect to="/profile" />;
+  }
+
   return (
     <div>
       <h1>LOGIN</h1>
@@ -49,3 +60,10 @@ export default function LoginPage() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.auth.isLoggedIn,
+  };
+};
+export default connect(mapStateToProps, { login })(LoginPage);
