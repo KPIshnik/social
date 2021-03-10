@@ -28,9 +28,9 @@ class ProfilePageContainer extends React.Component {
   }
 
   render() {
-    if (!this.props.userProfile) {
-      return <Preloader />;
-    }
+    // if (!this.props.userProfile) {
+    //   return <Preloader />;
+    // }
 
     return (
       <div className={style.profile + " content"}>
