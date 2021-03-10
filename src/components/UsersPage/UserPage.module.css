@@ -22,11 +22,16 @@
   border-color: white;
   font-size: 24px;
 }
+.pagesList {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
 
 .pagesList li {
   list-style: none;
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 5px;
   font-size: 18px;
 }
 

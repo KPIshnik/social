@@ -17,7 +17,12 @@ import ProfileStatus from "./ProfileStatus/ProfileStatus";
 class ProfilePageContainer extends React.Component {
   componentDidMount() {
     let userID = this.props.match.params.id;
-    if (!userID) userID = this.props.userID;
+    if (!userID) {
+      userID = this.props.userID;
+      if (!userID) {
+        this.props.history.push("/login");
+      }
+    }
     this.props.getUserProfile(userID);
     this.props.getUserStatus(userID);
   }
@@ -45,6 +50,7 @@ let mapStateToProps = (state) => {
     userProfile: state.profilePage.userProfile,
     userStatus: state.profilePage.userStatus,
     userID: state.auth.id,
+    inicialized: state.inicialize.inicialized,
   };
 };
 let mapDispathToProps = {

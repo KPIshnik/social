@@ -1,13 +1,9 @@
 import React from "react";
 import Header from "./header";
 import { connect } from "react-redux";
-import { authMe, logout } from "../state/authReducer";
+import { logout } from "../state/authReducer";
 
 class HeaderWraper extends React.Component {
-  componentDidMount() {
-    this.props.authMe();
-  }
-
   render() {
     return (
       <Header
@@ -27,7 +23,6 @@ let mapStateToProps = (state) => {
 };
 
 let mapDispatchToProps = {
-  authMe,
   logout,
 };
 

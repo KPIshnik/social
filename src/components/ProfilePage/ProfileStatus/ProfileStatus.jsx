@@ -1,4 +1,5 @@
 import React from "react";
+import ProfileStatusWithHoocks from "./ProfileStatusWithHoocks";
 
 export default class ProfileStatus extends React.Component {
   constructor(props) {
@@ -37,25 +38,25 @@ export default class ProfileStatus extends React.Component {
     }
   }
   render() {
-    return (
-      <>
-        {this.state.editMode && (
-          <div>
-            <input
-              autoFocus
-              value={this.state.status}
-              onBlur={this.setStatus}
-              onChange={this.handdleChange}
-              type="text"
-            />
-          </div>
-        )}
-        {!this.state.editMode && (
-          <div onDoubleClick={this.editStatus}>
-            {this.props.status || "no status here"}
-          </div>
-        )}
-      </>
-    );
+    return <ProfileStatusWithHoocks {...this.props} />;
+    //   <>
+    //     {this.state.editMode && (
+    //       <div>
+    //         <input
+    //           autoFocus
+    //           value={this.state.status}
+    //           onBlur={this.setStatus}
+    //           onChange={this.handdleChange}
+    //           type="text"
+    //         />
+    //       </div>
+    //     )}
+    //     {!this.state.editMode && (
+    //       <div onDoubleClick={this.editStatus}>
+    //         {this.props.status || "no status here"}
+    //       </div>
+    //     )}
+    //   </>
+    // );
   }
 }

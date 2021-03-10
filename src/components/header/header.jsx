@@ -6,7 +6,7 @@ export default function Header(props) {
 
     props.logout();
   };
-  console.log("aSdaf");
+
   return (
     <div className={styles.header} id="header">
       <h1 onClick={handdleClick}>

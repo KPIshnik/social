@@ -1,3 +1,4 @@
+import Paginator from "./Paginatoer";
 import UserItem from "./userItem/userItem";
 import style from "./UserPage.module.css";
 
@@ -29,8 +30,12 @@ export default function UsersPage(props) {
   return (
     <div className={style.main}>
       <h3> Users: </h3>
-      <ul className={style.pagesList}>{pages}</ul>
-
+      {/* <ul className={style.pagesList}>{pages}</ul> */}
+      <Paginator
+        pageCount={props.pageCount}
+        currentPage={props.currentPage}
+        onPageChanged={props.onPageChanged}
+      />
       {users}
 
       <button onClick={props.loadMoreUsers} className={style.button}>

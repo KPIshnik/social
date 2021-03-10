@@ -1,25 +1,53 @@
 import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import HeaderWraper from "./components/header/HeaderWraper";
 import Navbar from "./components/navbar/navbar";
 import ProfilePageContainer from "./components/ProfilePage/ProfilePageContainer";
-import DialogsPage from "./components/dialogPage/DialogsPage";
-import UsersPageWraper from "./components/UsersPage/userPageWraper";
-import LoginPage from "./components/loginPage/LoginPage";
 
-function App(props) {
-  return (
-    <Router>
+import React, { lazy, Suspense } from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { setInicialized } from "./components/state/IticializeReducer";
+import Preloader from "./components/common/Preloader";
+
+const UsersPageWraper = lazy(() =>
+  import("./components/UsersPage/userPageWraper")
+);
+const DialogsPage = lazy(() => import("./components/dialogPage/DialogsPage"));
+const LoginPage = lazy(() => import("./components/loginPage/LoginPage"));
+class App extends React.Component {
+  componentDidMount() {
+    this.props.setInicialized();
+  }
+
+  render() {
+    if (!this.props.inicialized) return <Preloader />;
+    return (
       <div className="App">
         <HeaderWraper />
         <Navbar />
         <Route path="/profile/:id?" render={() => <ProfilePageContainer />} />
-        <Route path="/dialogs" render={() => <DialogsPage />} />
-        <Route path="/users" render={() => <UsersPageWraper />} />
-        <Route path="/login" render={() => <LoginPage />} />
+        <Suspense fallback={Preloader}>
+          <Route path="/dialogs" render={() => <DialogsPage />} />
+          <Route path="/users" render={() => <UsersPageWraper />} />
+          <Route path="/login" render={() => <LoginPage />} />
+        </Suspense>
       </div>
-    </Router>
-  );
+    );
+  }
 }
 
-export default App;
+let mspStateToProps = (state) => {
+  return {
+    inicialized: state.inicialize.inicialized,
+  };
+};
+
+let mapDispatchToProps = {
+  setInicialized,
+};
+
+export default compose(
+  withRouter,
+  connect(mspStateToProps, mapDispatchToProps)
+)(App);

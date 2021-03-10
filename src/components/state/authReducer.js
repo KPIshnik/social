@@ -36,7 +36,7 @@ export function logoutAC() {
 }
 
 export const authMe = () => (dispatch) => {
-  authAPI.me().then((response) => {
+  return authAPI.me().then((response) => {
     if (response.resultCode === 0) {
       dispatch(loginAC(response.data));
     }
@@ -46,7 +46,8 @@ export const authMe = () => (dispatch) => {
 export const login = (loginData) => (dispatch) => {
   authAPI.login(loginData).then((response) => {
     if (response.data.resultCode === 0) {
-      dispatch(loginAC(response.data));
+      console.log(response.data);
+      dispatch(authMe());
     } else {
       console.log(response.data.messages);
       dispatch(stopSubmit("login", { _error: response.data.messages[0] }));

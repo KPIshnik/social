@@ -1,6 +1,7 @@
+import React from "react";
 import style from "./ProfileInfo.module.css";
 
-export default function ProfileInfo(props) {
+const ProfileInfo = React.memo((props) => {
   const user = props.user;
 
   return (
@@ -12,4 +13,6 @@ export default function ProfileInfo(props) {
       </h2>
     </div>
   );
-}
+});
+
+export default ProfileInfo;

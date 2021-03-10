@@ -6,11 +6,14 @@ import App from "./App";
 import store from "./components/state/redux-store";
 
 import { Provider } from "react-redux";
+import { BrowserRouter as Router, HashRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <HashRouter>
+        <App />
+      </HashRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

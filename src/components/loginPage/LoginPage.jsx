@@ -45,11 +45,10 @@ LoginForm = reduxForm({
 
 function LoginPage(props) {
   function onSubmit(loginData) {
-    console.log(loginData);
     props.login(loginData);
   }
 
-  if (props.isLoggedIn) {
+  if (props.isLoggedIn && props.userID) {
     return <Redirect to="/profile" />;
   }
 
@@ -64,6 +63,7 @@ function LoginPage(props) {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.auth.isLoggedIn,
+    userID: state.auth.id,
   };
 };
 export default connect(mapStateToProps, { login })(LoginPage);

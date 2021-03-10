@@ -5,16 +5,25 @@ import {
   followUser,
   unFollowUser,
 } from "../state/usersReducer";
+import {
+  currentPageSelector,
+  followingInProgresSelector,
+  getUsersSelector,
+  getUsersSelectorSuper,
+  isFatchingselector,
+  pageCountSelector,
+  usersOnPageSelector,
+} from "../state/usersSelectors";
 import UsersClassPage from "./UsersClassPage";
 
 let mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    pageCount: state.usersPage.pageCount,
-    usersOnPage: state.usersPage.usersOnPage,
-    currentPage: state.usersPage.currentPage,
-    isFatching: state.usersPage.isFatching,
-    followingInProgres: state.usersPage.followingInProgres,
+    users: getUsersSelectorSuper(state),
+    pageCount: pageCountSelector(state),
+    usersOnPage: usersOnPageSelector(state),
+    currentPage: currentPageSelector(state),
+    isFatching: isFatchingselector(state),
+    followingInProgres: followingInProgresSelector(state),
   };
 };
 
